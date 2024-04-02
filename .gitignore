@@ -1,0 +1,50 @@
+# ASP.NET Core
+*.obj
+*.exe
+*.dll
+*.log
+*.vscode
+*.vs
+**/bin/
+**/obj/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.dll.config.user
+*.lock.json
+/.vscode
+
+# Rider
+.idea/
+
+# Others
+*.Cache
+ClientBin/
+[Ss]tyle[Cc]op.*
+~$*
+*.dbmdl
+*.dbproj.schemaview
+*.pfx
+*.publishsettings
+node_modules/
+wwwroot/lib/
+*.crt
+*.cer

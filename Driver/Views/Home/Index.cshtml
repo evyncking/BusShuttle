@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <form method="post" action="/form" id="submissionForm">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <h3>What is your bus number</h3>
+                    <select name="BusNumber" id="BusNumber" class="form-control">
+                        <option value="Select a bus"></option>
+                        @foreach (var busNumber in ViewBag.BusNumbers)
+                        {
+                            <option value="@busNumber">@busNumber</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <h3>What is your name</h3>
+                    <select name="driverOption" id="driverOption" class="form-control">
+                        <option value="Select your name"></option>
+                        @foreach (var driver in ViewBag.Drivers)
+                        {
+                            <option value="@driver">@driver</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <h3>What loop will you be on</h3>
+                    <select name="LoopOption" id="LoopOption" class="form-control">
+                        <option value="Select a loop"></option>
+                        @foreach (var loopOption in ViewBag.LoopOptions)
+                        {
+                            <option value="@loopOption">@loopOption</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <h3>Select a stop</h3>
+                    <select name="stops" id="stops" class="form-control">
+                        <option value="Stop 1">Stop 1</option>
+                        <option value="Stop 2">Stop 2</option>
+                        <option value="Stop 3">Stop 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-xl btn-block btn-success">Submit</button>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        
+    </form>
+</div>
+
+<div id="submittedMessage" class="alert alert-success" style="display: none;">
+    <button type="button" class="close" onclick="dismissMessage()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    Your form has been submitted
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.getElementById('submissionForm');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var stopsSelect = document.getElementById('stops');
+            var currentStopIndex = stopsSelect.selectedIndex;
+            var nextStopIndex = currentStopIndex + 1;
+
+            if (nextStopIndex < stopsSelect.options.length) {
+                stopsSelect.selectedIndex = nextStopIndex;
+            }
+
+            displayMessage();
+        });
+    });
+
+    function dismissMessage() {
+        document.getElementById('submittedMessage').style.display = 'none';
+    }
+
+    function displayMessage() {
+        document.getElementById('submittedMessage').style.display = 'block';
+    }
+</script>
