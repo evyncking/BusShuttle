@@ -15,7 +15,7 @@ namespace ManagerDashboard.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View("~/Views/Home/Index.cshtml");
+            return View("~/Views/Driver/Index.cshtml");
         }
 
         public IActionResult Privacy()
@@ -26,7 +26,7 @@ namespace ManagerDashboard.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View("~/Views/Home/Login.cshtml");
+            return View("~/Views/Driver/Login.cshtml");
         }
 
         [HttpPost]

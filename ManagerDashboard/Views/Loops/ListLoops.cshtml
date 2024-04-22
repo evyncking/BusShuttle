@@ -1,0 +1,33 @@
+@model IEnumerable<LoopModel>
+
+<div class="text-center">
+<h2 style="color: red;">Loops</h2>
+<h3>Create a new loop</h3>
+</div>
+<a asp-action="AddLoop" asp-controller="ManagerDashboard" class="btn btn-primary">Create Loop</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Loop Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loop in Model)
+        {
+            <tr>
+                <td>@loop.LoopName</td>
+                <td>
+                    <form asp-action="EditLoop" asp-controller="ManagerDashboard" method="get">
+                        <input type="hidden" name="id" value="@loop.Id" />
+                        <button type="submit" class="btn btn-secondary">Edit</button>
+                    </form>
+                    <form asp-action="DeleteLoop" asp-controller="ManagerDashboard" method="get">
+                        <input type="hidden" name="id" value="@loop.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

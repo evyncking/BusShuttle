@@ -1,0 +1,39 @@
+@model IEnumerable<BusModel>
+
+<div class="text-center">
+<h2 style="color: red;">Buses</h2>
+<h3>Create a new bus</h3>
+</div>
+<form asp-action="AddBus" asp-controller="ManagerDashboard" method="post">
+    <div class="form-group">
+        <label for="busNumber">Enter new bus:</label>
+        <input type="text" id="busNumber" name="BusNumber" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Bus Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bus in Model)
+    {
+        <tr>
+            <td>@bus.BusNumber</td>
+            <td>
+                <form asp-action="EditBus" asp-controller="ManagerDashboard" method="get">
+                    <input type="hidden" name="id" value="@bus.Id" />
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+                <form asp-action="DeleteBus" asp-controller="ManagerDashboard" method="get">
+                    <input type="hidden" name="id" value="@bus.Id" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,12 @@
+@model LoopModel
+
+<h2>Edit Loop</h2>
+
+<form asp-action="EditLoop" asp-controller="ManagerDashboard" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label for="loopName">Loop Name:</label>
+        <input type="text" class="form-control" id="loopName" name="loopName" value="@Model.LoopName" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

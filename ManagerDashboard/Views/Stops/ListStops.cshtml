@@ -1,0 +1,39 @@
+@model IEnumerable<StopModel>
+
+<div class="text-center">
+    <h2 style="color: red;">Stops</h2>
+    <h3>Create a new stop</h3>
+</div>
+<form asp-action="AddStop" asp-controller="ManagerDashboard" method="post">
+    <div class="form-group">
+        <label for="stopName">Enter stop name:</label>
+        <input type="text" id="stopName" name="StopName" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Stop Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stop in Model)
+        {
+            <tr>
+                <td>@stop.StopName</td>
+                <td>
+                    <form asp-action="EditStop" asp-controller="ManagerDashboard" method="get">
+                        <input type="hidden" name="id" value="@stop.Id" />
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                    <form asp-action="DeleteStop" asp-controller="ManagerDashboard" method="get">
+                        <input type="hidden" name="id" value="@stop.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

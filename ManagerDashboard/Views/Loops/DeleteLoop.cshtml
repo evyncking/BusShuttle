@@ -1,0 +1,11 @@
+@model LoopModel
+
+<h2>Delete Loop</h2>
+
+<p>Are you sure you want to delete the loop "@Model.LoopName"?</p>
+
+<form asp-action="DeleteLoopConfirmed" asp-controller="ManagerDashboard" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="ListLoops" asp-controller="ManagerDashboard" class="btn btn-secondary">Cancel</a>
+</form>

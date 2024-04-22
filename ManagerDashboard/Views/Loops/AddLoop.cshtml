@@ -1,0 +1,11 @@
+@model LoopModel
+
+<h2>Create a New Loop</h2>
+
+<form asp-action="AddLoop" asp-controller="ManagerDashboard" method="post">
+    <div class="form-group">
+        <label for="loopName">Enter Loop Name:</label>
+        <input type="text" class="form-control" id="loopName" name="loopName" placeholder="Enter loop name" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

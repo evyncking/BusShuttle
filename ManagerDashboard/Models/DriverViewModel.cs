@@ -4,6 +4,8 @@ namespace ManagerDashboard.Models
 {
     public class DriverViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         public string FirstName { get; set; }
 

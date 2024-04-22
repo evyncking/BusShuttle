@@ -1,0 +1,11 @@
+@model ManagerDashboard.Models.BusModel
+
+<h2>Create a new bus</h2>
+
+<form asp-action="AddBus" asp-controller="ManagerDashboard" method="post">
+    <div class="form-group">
+        <label for="busNumber">Enter new bus:</label>
+        <input type="text" class="form-control" id="busNumber" name="BusNumber" placeholder="Enter new bus" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
