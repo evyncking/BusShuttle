@@ -3,18 +3,26 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ManagerDashboard.Models;
+using Microsoft.EntityFrameworkCore;
+using ManagerDashboard.Models;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register List<DriverModel>, List<BusModel> and Manager as services
+// Register List<DriverModel>, List<BusModel>, and Manager as services
 builder.Services.AddSingleton<List<DriverModel>>();
 builder.Services.AddSingleton<List<BusModel>>();
 builder.Services.AddSingleton<List<LoopModel>>();
 builder.Services.AddSingleton<List<StopModel>>();
+builder.Services.AddSingleton<List<RouteModel>>();
 builder.Services.AddTransient<Manager>();
+
+// Set up configuration
+var configuration = builder.Configuration;
+
+builder.Services.AddDbContext<BusShuttleContext>(options =>
+    options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -22,15 +30,12 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Driver/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

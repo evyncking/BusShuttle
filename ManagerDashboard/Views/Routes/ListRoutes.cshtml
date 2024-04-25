@@ -1,0 +1,81 @@
+@model IEnumerable<RouteModel>
+
+<div class="text-center">
+    <h2 style="color: red;">Routes</h2>
+    <h3>Create a new route</h3>
+</div>
+
+<div class="form-group">
+    <label for="displayBy">Display by loop:</label>
+    <select id="displayBy" name="DisplayBy" class="form-control">
+        <option value="0">All Loops</option>
+        @foreach (var loop in ViewBag.Loops)
+        {
+            <option value="@loop.Value">@loop.Text</option>
+        }
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="displayStop">Display by stop:</label>
+    <select id="displayStop" name="DisplayStop" class="form-control">
+        <option value="0">All Stops</option>
+        @foreach (var stop in ViewBag.Stops)
+        {
+            <option value="@stop.Value">@stop.Text</option>
+        }
+    </select>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Loop</th>
+            <th>Stop</th>
+            @* <th>Position</th> *@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var route in Model)
+        {
+            <tr data-loop="@route.LoopId">
+                <td>@route.LoopId</td>
+                <td>@route.StopId</td>
+                @* <td>@route.Position</td> *@
+                <td>
+                    <a asp-action="EditRoute" asp-controller="ManagerDashboard" asp-route-id="@route.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="DeleteRoute" asp-controller="ManagerDashboard" asp-route-id="@route.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $('#displayBy').change(function () {
+        var selectedLoop = $(this).val();
+        var selectedStop = $('#displayStop').val();
+        filterRoutes(selectedLoop, selectedStop);
+    });
+
+    $('#displayStop').change(function () {
+        var selectedLoop = $('#displayBy').val();
+        var selectedStop = $(this).val();
+        filterRoutes(selectedLoop, selectedStop);
+    });
+
+    function filterRoutes(loopId, stopId) {
+        if (loopId !== '0' && stopId !== '0') {
+            $('tbody tr').hide();
+            $('tbody tr[data-loop="' + loopId + '"][data-stop="' + stopId + '"]').show();
+        } else if (loopId !== '0') {
+            $('tbody tr').hide();
+            $('tbody tr[data-loop="' + loopId + '"]').show();
+        } else if (stopId !== '0') {
+            $('tbody tr').hide();
+            $('tbody tr[data-stop="' + stopId + '"]').show();
+        } else {
+            $('tbody tr').show();
+        }
+    }
+</script>

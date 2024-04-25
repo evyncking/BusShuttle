@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ManagerDashboard.Models
 {
     public class DriverViewModel
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]

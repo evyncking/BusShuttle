@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DriverModel>
+﻿@model IEnumerable<ManagerDashboard.Models.DriverModel>
 
 <div class="text-center">
     <h1 style="color: red;" class="display-4">Drivers</h1>
@@ -14,21 +14,22 @@
                 <th>Last Name</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @if (Model != null && Model.Any())
             {
-                @foreach (var driver in Model.Select((value, index) => new { Value = value, Index = index }))
+                @foreach (var driver in Model)
                 {
                     <tr>
-                        <td>@driver.Value.FirstName</td>
-                        <td>@driver.Value.LastName</td>
-                        <td>@driver.Value.Username</td>
-                        <td>@driver.Value.Password</td>
+                        <td>@driver.FirstName</td>
+                        <td>@driver.LastName</td>
+                        <td>@driver.Username</td>
+                        <td>@driver.Password</td>
                         <td>
-                            <a class="btn btn-primary" href="/ManagerDashboard/EditDriver?index=@driver.Index">Edit</a>
-                            <a class="btn btn-danger" href="/ManagerDashboard/DeleteDriver?index=@driver.Index">Delete</a>
+                            <a class="btn btn-primary" href="/ManagerDashboard/EditDriver?id=@driver.Id">Edit</a>
+                            <a class="btn btn-danger" href="/ManagerDashboard/DeleteDriver?id=@driver.Id">Delete</a>
                         </td>
                     </tr>
                 }

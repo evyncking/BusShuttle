@@ -6,45 +6,50 @@ namespace Driver.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly DriverDbContext _context;
 
-    private readonly List<string> _drivers = new List<string> { "Evyn K" };
-
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(DriverDbContext context)
     {
-        _logger = logger;
+        _context = context;
     }
 
-    public IActionResult Index()
+    public IActionResult Login()
     {
-        ViewBag.LoopOptions = new List<string> { "Blue", "Orange", "Green" };
-        ViewBag.BusNumbers = new List<string> { "1", "2", "3" };
-        ViewBag.Drivers = _drivers;
         return View();
     }
 
     [HttpPost]
-    public IActionResult Index(string loop, string bus, List<string> stops)
+    public IActionResult Login(string username, string password)
     {
-        Console.WriteLine($"Selected loop: {loop}");
-        Console.WriteLine($"Selected bus: {bus}");
-        Console.WriteLine("Selected stops:");
-        foreach (var stop in stops)
+        // Check username and password against database
+        if (IsValidUser(username, password))
         {
-            Console.WriteLine(stop);
+            return RedirectToAction("SelectionForm");
         }
-
-        return RedirectToAction(nameof(Index));
+        else
+        {
+            // Handle invalid login
+            return View();
+        }
     }
 
-    public IActionResult Privacy()
+    public IActionResult SelectionForm()
     {
-        return View();
+        var viewModel = new SelectionFormViewModel
+        {
+            BusNumbers = _context.BusNumbers.Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Number }),
+            Names = _context.Names.Select(n => new SelectListItem { Value = n.Id.ToString(), Text = n.Name }),
+            Loops = _context.Loops.Select(l => new SelectListItem { Value = l.Id.ToString(), Text = l.LoopName })
+        };
+
+        return View(viewModel);
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    private bool IsValidUser(string username, string password)
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        // Implement your logic to validate username and password
+        // For example, check if the credentials match those in the database
+        return true; // Return true for demonstration purposes
     }
 }
+

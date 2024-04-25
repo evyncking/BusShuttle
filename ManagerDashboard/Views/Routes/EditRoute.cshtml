@@ -1,0 +1,41 @@
+@model RouteModel
+
+<h2>Edit Route</h2>
+
+<form asp-action="EditRoute" asp-controller="ManagerDashboard" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label for="loopId">Select a Loop:</label>
+        <select id="loopId" name="LoopId" class="form-control" asp-items="@(new SelectList(ViewBag.Loops, "Id", "LoopName", Model.LoopId))">
+            <option>Select a Loop</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="stopId">Assign a Stop:</label>
+        <select id="stopId" name="StopId" class="form-control" asp-items="@(new SelectList(ViewBag.Stops, "Id", "StopName", Model.StopId))">
+            <option>Assign a Stop</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="position">Before/After:</label>
+        <select id="position" name="Position" class="form-control">
+            <option>Before all</option>
+            <!-- Add other options as needed -->
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="ListRoutes" asp-controller="ManagerDashboard" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+<div>
+    <form asp-action="MoveRouteUp" asp-controller="ManagerDashboard" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-primary">Move Up</button>
+    </form>
+    <form asp-action="MoveRouteDown" asp-controller="ManagerDashboard" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-primary">Move Down</button>
+    </form>
+</div>

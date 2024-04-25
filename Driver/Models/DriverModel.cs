@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ManagerDashboard.Models
+namespace DriverApp.Models
 {
     public class DriverModel
     {
@@ -9,17 +8,20 @@ namespace ManagerDashboard.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string FirstName { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string LastName { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string Username { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string Password { get; set; }
 
-        public bool IsActive { get; set;}
     }
 }

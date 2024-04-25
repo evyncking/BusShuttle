@@ -1,0 +1,34 @@
+@model SelectionFormViewModel
+
+<h2>Selection Form</h2>
+
+<form asp-action="SubmitSelection" asp-controller="Home" method="post">
+    <div class="form-group">
+        <label for="busNumber">Bus Number:</label>
+        <select id="busNumber" name="busNumber" class="form-control">
+            @foreach (var item in Model.BusNumbers)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <select id="name" name="name" class="form-control">
+            @foreach (var item in Model.Names)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="loop">Loop:</label>
+        <select id="loop" name="loop" class="form-control">
+            @foreach (var item in Model.Loops)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
