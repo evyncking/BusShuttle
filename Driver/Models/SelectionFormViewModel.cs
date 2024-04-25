@@ -6,19 +6,8 @@ namespace Driver.Models
 {
     public class SelectionFormViewModel
     {
-        [Required]
-        public int BusNumberId { get; set; }
-
-        [Required]
-        public int NameId { get; set; }
-
-        [Required]
-        public int LoopId { get; set; }
-
-        public List<SelectListItem> BusNumbers { get; set; }
-
-        public List<SelectListItem> Names { get; set; }
-
-        public List<SelectListItem> Loops { get; set; }
+        public IEnumerable<SelectListItem> BusNumbers { get; set; }
+        public IEnumerable<SelectListItem> FirstNames { get; set; }
+        public IEnumerable<SelectListItem> LoopNames { get; set; }
     }
 }

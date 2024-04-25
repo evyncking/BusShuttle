@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DriverApp.Models
+namespace Driver.Models
 {
     public class DriverModel
     {

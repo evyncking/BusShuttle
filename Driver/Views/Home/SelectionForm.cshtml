@@ -15,7 +15,7 @@
     <div class="form-group">
         <label for="name">Name:</label>
         <select id="name" name="name" class="form-control">
-            @foreach (var item in Model.Names)
+            @foreach (var item in Model.FirstNames)
             {
                 <option value="@item.Value">@item.Text</option>
             }
@@ -24,7 +24,7 @@
     <div class="form-group">
         <label for="loop">Loop:</label>
         <select id="loop" name="loop" class="form-control">
-            @foreach (var item in Model.Loops)
+            @foreach (var item in Model.LoopNames)
             {
                 <option value="@item.Value">@item.Text</option>
             }

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ManagerDashboard.Models;
+using Driver.Models;
 
 namespace Driver.Models
 {
@@ -9,6 +9,9 @@ namespace Driver.Models
         {
         }
 
+        public DbSet<BusNumber> BusNumbers { get; set; }
+        public DbSet<Name> Names { get; set; }
+        public DbSet<Loop> Loops { get; set; }
         public DbSet<DriverModel> Drivers { get; set; }
     }
 }
